@@ -6,7 +6,7 @@ const BASE_URL = `https://${API_KEY}.mockapi.io/contacts`;
 export const requestContacts = async () => {
   try {
     const { data } = await axios.get(`${BASE_URL}/contacts`);
-    // console.log(data);
+    console.log(data);
     return data;
   } catch (error) {
     console.error('Error fetching contacts:', error);

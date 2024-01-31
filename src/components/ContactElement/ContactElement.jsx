@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { removeContact } from 'redux-state/contacts/contactsSlice';
 import css from './ContactElement.module.css';
 
-export const ContactElement = ({ id, name, number }) => {
+export const ContactElement = ({ id, name, phone }) => {
   const dispatch = useDispatch();
 
   const handleDeleteContact = () => {
@@ -13,7 +13,7 @@ export const ContactElement = ({ id, name, number }) => {
   return (
     <li className={css.contactElement}>
       <p>
-        &#8226; {name}: {number}
+        &#8226; {name}: {phone}
       </p>
       <button type="button" onClick={handleDeleteContact}>
         Delete

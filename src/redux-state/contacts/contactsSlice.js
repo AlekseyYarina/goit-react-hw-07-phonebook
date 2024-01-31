@@ -6,6 +6,7 @@ export const apiGetContacts = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const contacts = await requestContacts();
+      // console.log(contacts);
       return contacts;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -54,6 +55,7 @@ const contactsSlice = createSlice({
       .addCase(apiGetContacts.fulfilled, (state, action) => {
         state.contacts.isLoading = false;
         state.contacts.items = action.payload;
+        console.log(state.contacts.items);
       })
       .addCase(apiGetContacts.rejected, (state, action) => {
         state.contacts.isLoading = false;

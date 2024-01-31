@@ -29,6 +29,7 @@
 // });
 
 // export const persistor = persistStore(store);
+// =======================================================
 
 import { configureStore } from '@reduxjs/toolkit';
 import { contactsReducer } from './contacts/contactsSlice';
