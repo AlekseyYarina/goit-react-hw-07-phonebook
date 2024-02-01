@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { addContact } from 'redux-state/contacts/contactsSlice';
+import { addContact, apiAddContact } from 'redux-state/contacts/contactsSlice';
 import { selectContacts } from 'redux-state/contacts/selectors';
 import css from './ContactForm.module.css';
 
@@ -24,14 +24,21 @@ export const ContactForm = () => {
   const handleFormSubmit = e => {
     e.preventDefault();
     const name = e.currentTarget.elements.name.value;
-    const number = e.currentTarget.elements.number.value;
+    const phone = e.currentTarget.elements.phone.value;
     const formData = {
       name,
-      number,
+      phone,
     };
-
+    try {
+      dispatch(apiAddContact(formData));
+      console.log('Contact added successfully!');
+    } catch (error) {
+      console.error('Error adding contact:', error);
+    }
     handleAddContact(formData);
-    e.currentTarget.reset();
+    if (e.currentTarget) {
+      e.currentTarget.reset();
+    }
   };
 
   return (

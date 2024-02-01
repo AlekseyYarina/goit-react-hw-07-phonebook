@@ -17,17 +17,7 @@ export const requestContacts = async () => {
   }
 };
 
-export const addContact = async () => {
-  try {
-    const { data } = await instance.post('/contacts');
-    return data;
-  } catch (error) {
-    console.error('Error adding contact:', error);
-    throw error;
-  }
-};
-
-export const deleteContact = async contactId => {
+export const requestDeleteContact = async contactId => {
   try {
     await instance.delete(`/contacts/${contactId}`);
     return contactId;
@@ -36,6 +26,17 @@ export const deleteContact = async contactId => {
     throw error;
   }
 };
+
+export const requestAddContact = async formData => {
+  try {
+    const { data } = await instance.post('/contacts', formData);
+    return data;
+  } catch (error) {
+    console.error('Error adding contact:', error);
+    throw error;
+  }
+};
+
 // ============================================
 // export const requestMovieById = async movieId => {
 //   try {

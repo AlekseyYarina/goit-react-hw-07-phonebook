@@ -15,7 +15,7 @@ export const ContactElement = ({ id, name, phone }) => {
 
   const handleDeleteContact = async () => {
     try {
-      await dispatch(apiDeleteContact(id)); // Передайте contactId вместо создания action
+      await dispatch(apiDeleteContact(id));
     } catch (error) {
       console.error('Error deleting contact:', error);
     }
