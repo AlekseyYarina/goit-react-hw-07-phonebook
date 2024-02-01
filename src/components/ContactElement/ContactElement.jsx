@@ -1,13 +1,24 @@
 import { useDispatch } from 'react-redux';
-import { removeContact } from 'redux-state/contacts/contactsSlice';
+import {
+  apiDeleteContact,
+  // removeContact,
+} from 'redux-state/contacts/contactsSlice';
 import css from './ContactElement.module.css';
 
 export const ContactElement = ({ id, name, phone }) => {
   const dispatch = useDispatch();
 
-  const handleDeleteContact = () => {
-    const action = removeContact(id);
-    dispatch(action);
+  // const handleDeleteContact = () => {
+  //   const action = removeContact(id);
+  //   dispatch(action);
+  // };
+
+  const handleDeleteContact = async () => {
+    try {
+      await dispatch(apiDeleteContact(id)); // Передайте contactId вместо создания action
+    } catch (error) {
+      console.error('Error deleting contact:', error);
+    }
   };
 
   return (

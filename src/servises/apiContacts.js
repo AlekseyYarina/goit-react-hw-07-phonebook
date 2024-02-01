@@ -1,20 +1,42 @@
 import axios from 'axios';
 
-const API_KEY = '65ba4abcb4d53c06655280d8';
-const BASE_URL = `https://${API_KEY}.mockapi.io/contacts`;
+// const API_KEY = '65ba4abcb4d53c06655280d8';
+
+const instance = axios.create({
+  baseURL: `https://65ba4abcb4d53c06655280d8.mockapi.io/contacts`,
+});
 
 export const requestContacts = async () => {
   try {
-    const { data } = await axios.get(`${BASE_URL}/contacts`);
-    console.log(data);
+    const { data } = await instance.get('/contacts');
+    // console.log(data);
     return data;
   } catch (error) {
     console.error('Error fetching contacts:', error);
-    console.error(error);
     throw error;
   }
 };
 
+export const addContact = async () => {
+  try {
+    const { data } = await instance.post('/contacts');
+    return data;
+  } catch (error) {
+    console.error('Error adding contact:', error);
+    throw error;
+  }
+};
+
+export const deleteContact = async contactId => {
+  try {
+    await instance.delete(`/contacts/${contactId}`);
+    return contactId;
+  } catch (error) {
+    console.error('Error delete contact:', error);
+    throw error;
+  }
+};
+// ============================================
 // export const requestMovieById = async movieId => {
 //   try {
 //     const { data } = await axios.get(`${BASE_URL}/movie/${movieId}`);

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { requestContacts } from 'servises/apiContacts';
+import { deleteContact, requestContacts } from 'servises/apiContacts';
 
 export const apiGetContacts = createAsyncThunk(
   'contacts/apiGetContacts',
@@ -8,6 +8,19 @@ export const apiGetContacts = createAsyncThunk(
       const contacts = await requestContacts();
       // console.log(contacts);
       return contacts;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const apiDeleteContact = createAsyncThunk(
+  'contact/apiDeleteContact',
+  async (contactId, thunkApi) => {
+    try {
+      // const contact = await deleteContact(contactId);
+      // return contact;
+      await deleteContact(contactId);
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -55,9 +68,25 @@ const contactsSlice = createSlice({
       .addCase(apiGetContacts.fulfilled, (state, action) => {
         state.contacts.isLoading = false;
         state.contacts.items = action.payload;
-        console.log(state.contacts.items);
+        // console.log(state.contacts.items);
       })
       .addCase(apiGetContacts.rejected, (state, action) => {
+        state.contacts.isLoading = false;
+        state.contacts.error = action.payload;
+      })
+      .addCase(apiDeleteContact.pending, (state, action) => {
+        state.contacts.isLoading = true;
+        state.contacts.error = null;
+      })
+      .addCase(apiDeleteContact.fulfilled, (state, action) => {
+        console.log('apiDeleteContact.fulfilled block executed');
+        state.contacts.isLoading = false;
+        const contactId = action.payload;
+        state.contacts.items = state.contacts.items.filter(
+          contact => contact.id !== contactId
+        );
+      })
+      .addCase(apiDeleteContact.rejected, (state, action) => {
         state.contacts.isLoading = false;
         state.contacts.error = action.payload;
       });
