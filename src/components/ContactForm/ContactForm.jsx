@@ -31,7 +31,6 @@ export const ContactForm = () => {
     };
     try {
       dispatch(apiAddContact(formData));
-      console.log('Contact added successfully!');
     } catch (error) {
       console.error('Error adding contact:', error);
     }
