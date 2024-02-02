@@ -35,7 +35,7 @@ export const ContactList = () => {
     <div>
       {isLoading && <Loader />}
       {error && <ErrorMessage error={error} />}
-      {!isLoading && !error && (
+      {!error && (
         <ul className={css.contacts}>
           {filteredContacts.map(contact => (
             <ContactElement
