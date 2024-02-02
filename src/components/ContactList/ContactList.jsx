@@ -8,7 +8,7 @@ import {
   selectFilter,
   selectIsLoading,
 } from 'redux-state/contacts/selectors';
-import { apiGetContacts } from 'redux-state/contacts/contactsSlice';
+import { apiGetContacts } from 'redux-state/contacts/operations';
 
 export const ContactList = () => {
   const dispatch = useDispatch();

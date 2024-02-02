@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { addContact, apiAddContact } from 'redux-state/contacts/contactsSlice';
+import { addContact } from 'redux-state/contacts/contactsSlice';
 import { selectContacts } from 'redux-state/contacts/selectors';
 import css from './ContactForm.module.css';
+import { apiAddContact } from 'redux-state/contacts/operations';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
