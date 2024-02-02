@@ -22,11 +22,6 @@ export const ContactList = () => {
     dispatch(apiGetContacts());
   }, [dispatch]);
 
-  // к сожалению после удаления контакта, обновленный массив контактов содержит удаленный. Не могу найти причину =(
-  useEffect(() => {
-    console.log('Update contacts:', contacts);
-  }, [contacts]);
-
   const getFilteredContacts = () => {
     const filterValue = filter || '';
     return contacts.filter(contact =>
