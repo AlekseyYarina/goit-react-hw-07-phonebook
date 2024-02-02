@@ -8,7 +8,7 @@ export const ContactElement = ({ id, name, phone }) => {
 
   const handleDeleteContact = async () => {
     try {
-      await dispatch(apiDeleteContact(id));
+      await dispatch(apiDeleteContact(id)).unwrap();
     } catch (error) {
       console.error('Error deleting contact:', error);
     }
